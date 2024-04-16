@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Application</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .weather-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Weather Application</h1>
+    <form id="weatherForm">
+        <input type="text" id="locationInput" placeholder="Enter Location (City, State, Country)">
+        <input type="submit" value="Get Weather">
+    </form>
+    <div class="weather-info" id="weatherInfo"></div>
+</div>
+
+<script>
+    document.getElementById('weatherForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // prevent form submission
+        let location = document.getElementById('locationInput').value;
+        fetchWeather(location);
+    });
+
+    function fetchWeather(location) {
+        // For demonstration purposes, let's pretend we're fetching data from a local source without an API key
+        // In a real-world scenario, you would fetch data from an API using an API key
+        // Here, we'll just display a random temperature and weather description
+        let randomTemp = Math.floor(Math.random() * 40); // Generate a random temperature between 0 and 40
+        let randomWeather = ['Sunny', 'Cloudy', 'Rainy', 'Snowy'][Math.floor(Math.random() * 4)]; // Select a random weather condition
+        let cityName = location.split(',')[0]; // Extract city name from the location
+
+        displayWeather({
+            name: cityName,
+            main: { temp: randomTemp },
+            weather: [{ description: randomWeather }]
+        });
+    }
+
+    function displayWeather(data) {
+        let weatherInfo = document.getElementById('weatherInfo');
+        weatherInfo.innerHTML = `
+            <h2>Weather in ${data.name}</h2>
+            <p>Temperature: ${data.main.temp}°C</p>
+            <p>Weather: ${data.weather[0].description}</p>
+        `;
+    }
+</script>
+
+</body>
+</html>
